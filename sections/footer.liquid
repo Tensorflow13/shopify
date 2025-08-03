@@ -1,0 +1,129 @@
+<footer class="footer-main">
+  <div class="footer-content container">
+    <div class="footer-section footer-about">
+      {%- if section.settings.footer_logo != blank -%}
+        <a href="{{ routes.root_url }}" class="footer-logo-link">
+          {{ section.settings.footer_logo | image_url: width: 400 | image_tag: alt: section.settings.footer_logo.alt, width: 150, class: 'footer-logo' }}
+        </a>
+      {%- else -%}
+        <p class="footer-logo-text"><a href="{{ routes.root_url }}">{{ shop.name }}</a></p>
+      {%- endif -%}
+      {%- if section.settings.footer_text != blank -%}
+        <p class="footer-text">{{ section.settings.footer_text }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="footer-section footer-links">
+      {% for i in (1..3) %}
+        {%- assign menu_id = 'menu_link_list_' | append: i -%}
+        {%- assign menu = section.settings[menu_id] -%}
+        {%- if menu != blank -%}
+          <div class="footer-menu">
+            <h4 class="footer-menu-heading">{{ menu.title }}</h4>
+            <ul>
+              {% for link in menu.links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {%- endif -%}
+      {% endfor %}
+    </div>
+
+    <div class="footer-section footer-collections">
+      <div class="footer-menu">
+        <h4 class="footer-menu-heading">Collections</h4>
+        <ul>
+          {% for collection in collections %}
+            <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-section footer-contact">
+      <div class="footer-menu">
+        <h4 class="footer-menu-heading">Contact</h4>
+        <ul>
+          {%- if shop.email != blank -%}
+            <li><a href="mailto:{{ shop.email }}">{{ shop.email }}</a></li>
+          {%- endif -%}
+          {%- if shop.phone != blank -%}
+            <li><a href="tel:{{ shop.phone }}">{{ shop.phone }}</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-section footer-legal">
+      {%- assign legal_menu = section.settings.menu_link_list_legal -%}
+      {%- if legal_menu != blank -%}
+        <div class="footer-menu">
+          <h4 class="footer-menu-heading">Legal</h4>
+          <ul>
+            {% for link in legal_menu.links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="footer-section footer-social">
+      {%- if section.settings.show_social_icons -%}
+        <div class="social-icons">
+          {%- if section.settings.social_instagram_link != blank -%}
+            <a href="{{ section.settings.social_instagram_link }}" target="_blank" class="social-icon" aria-label="Instagram">
+              <!-- Instagram SVG -->
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.429c-.5.21-.87.49-1.23.85-.36.36-.64.73-.85 1.23-.207.491-.341 1.077-.381 1.93-.038.853-.048 1.127-.048 3.321s.01 2.468.048 3.321c.04.852.174 1.437.381 1.93.21.5.49.87.85 1.23.36.36.73.64 1.23.85.491.207 1.077.341 1.93.381C5.556 15.99 5.829 16 8 16s2.444-.01 3.297-.048c.852-.04 1.437-.174 1.93-.381.5-.21.87-.49 1.23-.85.36-.36.64-.73.85-1.23.207-.491.341-1.077.381-1.93.038-.853.048-1.127.048-3.321s-.01-2.468-.048-3.321c-.04-.852-.174-1.437-.381-1.93-.21-.5-.49-.87-.85-1.23-.36-.36-.73-.64-1.23-.85-.491-.207-1.077-.341-1.93-.381C10.444.01 10.171 0 8 0zm0 1.58c2.164 0 2.404.01 3.25.047.78.034 1.21.166 1.48.276.32.13.56.29.74.48.18.18.35.42.48.74.11.27.24.7.27 1.48.038.846.047 1.086.047 3.25s-.01 2.404-.047 3.25c-.034.78-.166 1.21-.276 1.48-.13.32-.29.56-.48.74-.18.18-.42.35-.74.48-.27.11-.7.24-1.48.27-1.847.038-2.164.047-3.25.047-2.164 0-2.404-.01-3.25-.047-.78-.034-1.21-.166-1.48-.276-.32-.13-.56-.29-.74-.48-.18-.18-.35-.42-.48-.74-.11-.27-.24-.7-.27-1.48-.038-.846-.047-1.086-.047-3.25s.01-2.404.047-3.25c.034-.78.166-1.21.276-1.48.13-.32.29-.56.48-.74.18-.18.42-.35.74-.48.27-.11.7-.24 1.48-.27C5.596 1.59 5.836 1.58 8 1.58z"/>
+                <path d="M8 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm0 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                <path d="M11.954 2.873c-.27-.27-.58-.45-1-.62-.42-.16-.85-.26-1.3-.3-.45-.04-.84-.05-1.35-.05h-2.61c-.51 0-.9-.01-1.35.05-.45.04-.88.14-1.3.3-.42.17-.73.35-1 .62-.27.27-.45.58-.62 1-.16.42-.26.85-.3 1.3-.04.45-.05.84-.05 1.35v2.61c0 .51.01.9.05 1.35.04.45.14.88.3 1.3.17.42.35.73.62 1 .27.27.45.58.62 1 .16.42.26.85.3 1.3.04.45.05.84.05 1.35v2.61c0 .51.01.9.05 1.35.04.45.14.88.3 1.3.17.42.35.73.62 1 .27.27.45.58.62 1 .16.42.26.85.3 1.3.04.45.05.84.05 1.35v-2.61c0-.51-.01-.9-.05-1.35-.04-.45-.14-.88-.3-1.3zM10.884 8a2.884 2.884 0 1 1-5.768 0 2.884 2.884 0 0 1 5.768 0z"/>
+              </svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.social_pinterest_link != blank -%}
+            <a href="{{ section.settings.social_pinterest_link }}" target="_blank" class="social-icon" aria-label="Pinterest">
+              <!-- Pinterest SVG -->
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0a8 8 0 1 0 8 8 8 8 0 0 0-8-8zm0 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1zm0 2.375c-.718 0-1.357-.175-1.916-.525a3.864 3.864 0 0 0-1.258-1.07C3.9 1.455 3.327 1.155 2.68 1h-.25c-.2 0-.375.175-.375.375s.175.375.375.375h.25c.375 0 .7.125 1.05.375.325.25.575.525.75.8.25.375.425.675.55 1.15.175.475.25 1.025.25 1.625 0 .5-.05 1-.15 1.45-.1.45-.225.85-.35 1.25-.125.4-.25.75-.375 1.1-.125.35-.225.65-.275.9-.05.25-.1.5-.1.725 0 .225.075.4.225.525.125.125.275.2.45.225.175.025.375 0 .6-.075.225-.075.425-.2.6-.375.175-.175.325-.375.45-.6.125-.225.2-.475.25-.75.05-.275.075-.55.075-.825 0-.325-.05-.625-.15-.9-.1-.275-.25-.525-.425-.75-.175-.225-.375-.425-.6-.575-.225-.15-.45-.25-.675-.3-.225-.05-.425-.075-.625-.075-.325 0-.575.075-.75.225-.175.15-.3.35-.375.575-.075.225-.1.475-.1.725 0 .225.05.425.125.575.075.15.175.275.3.375.125.1.25.175.375.225.125.05.275.075.4.075.2 0 .375-.025.525-.075.15-.05.275-.1.4-.15.125-.05.225-.125.3-.175.075-.05.125-.1.125-.15s-.025-.1-.075-.15c-.125-.125-.3-.225-.525-.3-.225-.075-.425-.125-.6-.15-.175-.025-.325-.025-.45 0-.125.025-.225.075-.3.125-.075.05-.125.1-.15.15-.025.05-.05.1-.05.15s.025.1.075.15c.075.1.175.225.3.375.125.15.25.3.375.45.1.15.2.3.3.4.1.1.2.15.3.175.1.025.2.025.3.025.2 0 .4-.025.6-.075.2-.05.375-.125.525-.2.15-.075.275-.175.375-.275.1-.1.175-.2.225-.3.05-.1.075-.2.075-.3s-.025-.2-.075-.3c-.05-.1-.125-.2-.225-.275-.1-.075-.2-.15-.3-.175-.1-.025-.2-.025-.3 0-.175.025-.35.1-.525.2-.175.1-.325.25-.45.4-.125.15-.225.325-.3.525-.075.2-.125.425-.125.675 0 .275.05.525.15.75.1.225.2.425.3.575.1.15.2.275.325.4.125.125.25.225.4.3.15.075.3.125.45.15.15.025.3.025.45 0 .225-.025.425-.1.6-.2.175-.1.3-.25.4-.425.1-.175.175-.375.225-.6.05-.225.075-.475.075-.725 0-.55-.125-1.1-.375-1.65-.25-.55-.65-1.1-1.2-1.65-.55-.55-1.2-1.025-1.95-1.425-.75-.4-1.575-.6-2.475-.6"/>
+              </svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.social_facebook_link != blank -%}
+            <a href="{{ section.settings.social_facebook_link }}" target="_blank" class="social-icon" aria-label="Facebook">
+              <!-- Facebook SVG -->
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.935 6.75-7.951z"/>
+              </svg>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      <div class="footer-copyright">
+        <p>&copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Custom Footer",
+    "settings": [
+      { "type": "header", "content": "Footer Content" },
+      { "type": "image_picker", "id": "footer_logo", "label": "Logo for footer" },
+      { "type": "richtext", "id": "footer_text", "label": "Text", "default": "<p>A short description about your store.</p>" },
+      { "type": "header", "content": "Link Lists" },
+      { "type": "link_list", "id": "menu_link_list_1", "label": "Menu 1" },
+      { "type": "link_list", "id": "menu_link_list_2", "label": "Menu 2" },
+      { "type": "link_list", "id": "menu_link_list_3", "label": "Menu 3" },
+      { "type": "link_list", "id": "menu_link_list_legal", "label": "Legal Menu" },
+      { "type": "header", "content": "Social Media" },
+      { "type": "checkbox", "id": "show_social_icons", "label": "Show social media icons", "default": true },
+      { "type": "text", "id": "social_instagram_link", "label": "Instagram link" },
+      { "type": "text", "id": "social_pinterest_link", "label": "Pinterest link" },
+      { "type": "text", "id": "social_facebook_link", "label": "Facebook link" }
+    ]
+  }
+{% endschema %}
