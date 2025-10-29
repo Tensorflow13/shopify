@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "hero_iyt6zg": {
       "type": "hero",
@@ -43,7 +44,9 @@
       ],
       "settings": {
         "media_type_1": "image",
+        "image_1": "shopify://shop_images/hero_1.jpg",
         "media_type_2": "image",
+        "link": "",
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -57,7 +60,7 @@
         "section_height": "full-screen",
         "section_height_custom": 50,
         "color_scheme": "scheme-6",
-        "toggle_overlay": true,
+        "toggle_overlay": false,
         "overlay_color": "#00000099",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
@@ -67,142 +70,146 @@
         "padding-block-end": 0
       }
     },
-    "collection_links_Ut4aMz": {
-      "type": "collection-links",
+    "17542170840d305641": {
+      "type": "_blocks",
       "blocks": {
-        "link": {
-          "type": "_collection-link",
-          "static": true,
+        "ai_gen_block_3bc9521_VxzbYp": {
+          "type": "ai_gen_block_3bc9521",
           "settings": {
-            "show_count": true
-          },
-          "blocks": {
-            "title": {
-              "type": "_inline-collection-title",
-              "static": true,
-              "settings": {
-                "font": "var(--font-heading--family)",
-                "weight": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none"
-              },
-              "blocks": {}
-            },
-            "image": {
-              "type": "_image",
-              "static": true,
-              "settings": {
-                "height": "medium",
-                "ratio": "portrait",
-                "border_radius": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": []
-        }
-      },
-      "name": "Collection links",
-      "settings": {
-        "layout": "spotlight",
-        "section_width": "page-width",
-        "alignment": "left",
-        "image_position": "right",
-        "color_scheme": "",
-        "padding-block-start": 82,
-        "padding-block-end": 82
-      }
-    },
-    "featured_product_mTUbKC": {
-      "type": "featured-product",
-      "blocks": {
-        "media": {
-          "type": "_media-without-appearance",
-          "static": true,
-          "settings": {
-            "media_type": "image",
-            "video_loop": true,
-            "video_autoplay": false,
-            "image_position": "cover",
-            "video_position": "cover"
+            "heading": "Shop our collections",
+            "background_color": "#1a1a1a",
+            "text_color": "#ffffff",
+            "card_background": "#2a2a2a",
+            "all_collections_text": "View All Collections",
+            "all_collections_link": "",
+            "heading_size": 42,
+            "card_title_size": 32,
+            "card_description_size": 14,
+            "card_height": 400,
+            "card_border_radius": 8,
+            "button_border_radius": 4,
+            "collection_1": "",
+            "collection_1_title": "Luxury Handbags",
+            "collection_1_description": "Discover our exquisite collection of handcrafted luxury handbags, designed for the modern woman who values elegance and quality.",
+            "collection_1_image": "shopify://shop_images/O2A7132.jpg",
+            "collection_1_button_text": "Explore Collection",
+            "collection_2": "",
+            "collection_2_title": "Premium Bags",
+            "collection_2_description": "Explore our premium bag collection featuring timeless designs and superior craftsmanship for every occasion.",
+            "collection_2_image": "shopify://shop_images/col1.jpg",
+            "collection_2_button_text": "Explore Collection",
+            "collection_3": "",
+            "collection_3_title": "Artisan Accessories",
+            "collection_3_description": "Complete your look with our carefully curated selection of artisan accessories, each piece telling its own unique story.",
+            "collection_3_image": "shopify://shop_images/col5.jpg",
+            "collection_3_button_text": "Explore Collection"
           },
           "blocks": {}
-        },
-        "featured-product": {
-          "type": "_featured-product",
-          "name": "t:names.product",
-          "static": true,
-          "settings": {},
-          "blocks": {
-            "featured-product-title": {
-              "type": "product-title",
-              "name": "t:names.title",
-              "static": true,
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h5",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "featured-product-price": {
-              "type": "_featured-product-price",
-              "static": true,
-              "settings": {
-                "show_sale_price_first": true,
-                "type_preset": "h5"
-              },
-              "blocks": {}
-            },
-            "featured-product-gallery": {
-              "type": "_featured-product-gallery",
-              "name": "t:names.image",
-              "static": true,
-              "settings": {
-                "image_ratio": "adapt",
-                "constrain_to_viewport": "true"
-              },
-              "blocks": {}
-            },
-            "featured-product-swatches": {
-              "type": "swatches",
-              "name": "t:content.swatches",
-              "static": true,
-              "settings": {
-                "product_swatches_alignment": "flex-start",
-                "product_swatches_alignment_mobile": "flex-start",
-                "hide_padding": false,
-                "product_swatches_padding_top": 4,
-                "product_swatches_padding_bottom": 4,
-                "product_swatches_padding_left": 0,
-                "product_swatches_padding_right": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": []
         }
       },
-      "name": "t:names.featured_product",
+      "block_order": [
+        "ai_gen_block_3bc9521_VxzbYp"
+      ],
       "settings": {
-        "layout": "media-left",
-        "color_scheme": "scheme-3",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": true,
+        "overlay_color": "#000000",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "1754235633620b8b23": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_979717d_YmdE3a": {
+          "type": "ai_gen_block_979717d",
+          "settings": {
+            "heading": "The Art of Craftsmanship",
+            "description": "Step into our workshop where master artisans transform the finest African leather into works of art.",
+            "feature_1": "",
+            "feature_2": "",
+            "feature_3": "",
+            "primary_button_text": "View Workshop Gallery",
+            "primary_button_link": "shopify://collections",
+            "secondary_button_text": "",
+            "secondary_button_link": "",
+            "image_1": "shopify://shop_images/bags.jpg",
+            "image_2": "shopify://shop_images/purse_97118f94-753a-4204-a76c-d10925a58195.jpg",
+            "image_3": "shopify://shop_images/founder2.jpg",
+            "image_4": "shopify://shop_images/cotton.jpg",
+            "background_color": "#000000",
+            "text_color": "#e5e5e5",
+            "heading_color": "#ffffff",
+            "checkmark_color": "#4ade80",
+            "button_bg_color": "#ffffff",
+            "button_text_color": "#1a1a1a",
+            "button_hover_bg": "#e5e5e5",
+            "button_hover_text": "#1a1a1a",
+            "secondary_button_text_color": "#e5e5e5",
+            "secondary_button_border_color": "#e5e5e5",
+            "secondary_button_hover_bg": "#e5e5e5",
+            "secondary_button_hover_text": "#1a1a1a",
+            "placeholder_bg_color": "#2a2a2a",
+            "heading_size": 48,
+            "description_size": 18,
+            "feature_size": 16,
+            "button_text_size": 16,
+            "section_padding": 80,
+            "button_padding_x": 32,
+            "button_padding_y": 16,
+            "button_border_radius": 8,
+            "image_border_radius": 12
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_979717d_YmdE3a"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": true,
+        "overlay_color": "#000000",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
@@ -311,6 +318,7 @@
             "group_JHtHYm": {
               "type": "_product-card-group",
               "settings": {
+                "link": "",
                 "open_in_new_tab": false,
                 "content_direction": "row",
                 "vertical_on_mobile": true,
@@ -349,6 +357,7 @@
                   "type": "_product-card-group",
                   "name": "t:names.group",
                   "settings": {
+                    "link": "",
                     "open_in_new_tab": false,
                     "content_direction": "column",
                     "vertical_on_mobile": true,
@@ -440,6 +449,7 @@
                   "type": "_product-card-group",
                   "name": "t:names.group",
                   "settings": {
+                    "link": "",
                     "open_in_new_tab": false,
                     "content_direction": "column",
                     "vertical_on_mobile": true,
@@ -505,6 +515,7 @@
           ]
         }
       },
+      "disabled": true,
       "name": "Featured collection",
       "settings": {
         "collection": "all",
@@ -526,24 +537,412 @@
         "padding-block-end": 100
       }
     },
-    "hero_MVUtj6": {
-      "type": "hero",
+    "collection_links_Ut4aMz": {
+      "type": "collection-links",
       "blocks": {
-        "text_69C6UJ": {
+        "link": {
+          "type": "_collection-link",
+          "static": true,
+          "settings": {
+            "show_count": true
+          },
+          "blocks": {
+            "title": {
+              "type": "_inline-collection-title",
+              "static": true,
+              "settings": {
+                "font": "var(--font-heading--family)",
+                "weight": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none"
+              },
+              "blocks": {}
+            },
+            "image": {
+              "type": "_image",
+              "static": true,
+              "settings": {
+                "height": "medium",
+                "ratio": "portrait",
+                "border_radius": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": []
+        }
+      },
+      "disabled": true,
+      "name": "Collection links",
+      "settings": {
+        "collection_list": [],
+        "layout": "spotlight",
+        "section_width": "page-width",
+        "alignment": "left",
+        "image_position": "right",
+        "color_scheme": "",
+        "padding-block-start": 82,
+        "padding-block-end": 82
+      }
+    },
+    "featured_product_mTUbKC": {
+      "type": "featured-product",
+      "blocks": {
+        "media": {
+          "type": "_media-without-appearance",
+          "static": true,
+          "settings": {
+            "media_type": "image",
+            "link": "",
+            "video_loop": true,
+            "video_autoplay": false,
+            "image_position": "cover",
+            "video_position": "cover"
+          },
+          "blocks": {}
+        },
+        "featured-product": {
+          "type": "_featured-product",
+          "name": "t:names.product",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "featured-product-title": {
+              "type": "product-title",
+              "name": "t:names.title",
+              "static": true,
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "featured-product-price": {
+              "type": "_featured-product-price",
+              "static": true,
+              "settings": {
+                "show_sale_price_first": true,
+                "type_preset": "h5"
+              },
+              "blocks": {}
+            },
+            "featured-product-gallery": {
+              "type": "_featured-product-gallery",
+              "name": "t:names.image",
+              "static": true,
+              "settings": {
+                "image_ratio": "adapt",
+                "constrain_to_viewport": "true"
+              },
+              "blocks": {}
+            },
+            "featured-product-swatches": {
+              "type": "swatches",
+              "name": "t:content.swatches",
+              "static": true,
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 4,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": []
+        }
+      },
+      "disabled": true,
+      "name": "t:names.featured_product",
+      "settings": {
+        "product": "",
+        "layout": "media-left",
+        "color_scheme": "scheme-3",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "1754237304d9ab8d02": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_4fa8e3f_hBtBFN": {
+          "type": "ai_gen_block_4fa8e3f",
+          "settings": {
+            "heading": "Our Clients",
+            "description": "We're proud to work with industry-leading companies who trust us to deliver exceptional results.",
+            "background_color": "#000000",
+            "text_color": "#ffffff",
+            "section_padding": 60,
+            "heading_size": 48,
+            "description_size": 16,
+            "heading_margin": 20,
+            "description_margin": 40,
+            "grid_gap": 20,
+            "grid_margin": 50,
+            "logo_padding": 15,
+            "logo_max_height": 50,
+            "logo_border_radius": 12,
+            "grayscale_amount": 100,
+            "brightness_amount": 70,
+            "hover_lift": 8,
+            "hover_shadow_blur": 15,
+            "hover_shadow_spread": 5,
+            "hover_shadow_opacity": 20,
+            "logo_1": "shopify://shop_images/tsogo.jpg",
+            "logo_url_1": "#",
+            "logo_2": "shopify://shop_images/discovery.png",
+            "logo_url_2": "",
+            "logo_3": "shopify://shop_images/absa.png",
+            "logo_url_3": "",
+            "logo_4": "shopify://shop_images/mini.png",
+            "logo_url_4": "",
+            "logo_5": "shopify://shop_images/istore.png",
+            "logo_url_5": "",
+            "logo_6": "shopify://shop_images/donj.png",
+            "logo_url_6": "",
+            "logo_7": "shopify://shop_images/glen.png",
+            "logo_url_7": "",
+            "logo_8": "shopify://shop_images/au.png",
+            "logo_url_8": "",
+            "logo_9": "shopify://shop_images/psa.png",
+            "logo_url_9": "",
+            "logo_url_10": "",
+            "logo_url_11": "",
+            "logo_url_12": "",
+            "logo_url_13": "",
+            "logo_url_14": "",
+            "logo_url_15": "",
+            "logo_url_16": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_4fa8e3f_hBtBFN"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": true,
+        "overlay_color": "#000000",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "17542389413c082586": {
+      "type": "_blocks",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "1754240221130a3d57": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_b1f5c8a_ebyyqi": {
+          "type": "ai_gen_block_b1f5c8a",
+          "settings": {
+            "heading": "Press & Media",
+            "description": "Discover what the media is saying about our brand and latest developments.",
+            "read_more_text": "Read Full Story",
+            "background_color": "#000000",
+            "text_color": "#ffffff",
+            "card_background_color": "#2a2a2a",
+            "link_color": "#ffffff",
+            "section_padding": 80,
+            "card_border_radius": 8,
+            "heading_size": 48,
+            "description_size": 18,
+            "card_title_size": 20,
+            "card_excerpt_size": 14,
+            "article_1": "",
+            "article_1_title": "NEWS24",
+            "article_1_excerpt": "Inga Atelier: Lux Local Leather\nInga Atelier is making waves with its lux local leather goods, blending African craftsmanship with contemporary style.",
+            "article_1_link": "https://www.news24.com/citypress/trending/inga-atelier-lux-local-leather-20190216",
+            "article_2": "",
+            "article_2_title": "George Herald",
+            "article_2_excerpt": "South African Designer Inga Gubeka Takes on Luxury Bag Market\nInga Gubeka discusses his journey and vision for bringing South African luxury bags to the global stage.",
+            "article_2_link": "https://www.georgeherald.com/News/Article/LifeStyle/south-african-designer-inga-gubeka-takes-on-luxury-bag-market-202103010738",
+            "article_3": "",
+            "article_3_title": "Sowetan Live",
+            "article_3_excerpt": "Inga Happy SA Celebs Have Embraced His Bags.\nDiscover how South African celebrities are embracing Inga Gubeka's designer bags, showcasing local talent.",
+            "article_3_link": "https://www.sowetanlive.co.za/s-mag/fashion-beauty/2022-07-11-inga-happy-sa-celebs-have-embraced-his-bags",
+            "article_4": "",
+            "article_4_title": "Moneyweb",
+            "article_4_excerpt": "Profile: Inga Gubeka – Taking African Luxury to the World. An in-depth profile of Inga Gubeka's entrepreneurial journey and his mission to elevate African luxury globally.",
+            "article_4_link": "https://www.moneyweb.co.za/moneyweb-podcasts/small-business-conversations/profile-inga-gubeka-taking-african-luxury-to-the-world",
+            "article_5": "",
+            "article_5_title": "",
+            "article_5_excerpt": "",
+            "article_5_link": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_b1f5c8a_ebyyqi"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": true,
+        "overlay_color": "#000000",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "1754242241795c7663": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5bd99f9_YUYtyB": {
+          "type": "ai_gen_block_5bd99f9",
+          "settings": {
+            "heading": "<p>Our Story: Where Tradition Meets Excellence</p>",
+            "paragraph_1": "<p>At Inga Africa, we believe that true luxury lies not just in the finest materials, but in the stories they tell and the hands that craft them.<br/></p>",
+            "paragraph_2": "<p>Our artisans combine centuries-old African leather working techniques with contemporary design sensibilities, creating pieces that are both timeless and thoroughly modern.<br/></p>",
+            "story_image": "shopify://shop_images/founder_2.png",
+            "background_color": "#000000",
+            "text_color": "#ffffff",
+            "accent_color": "#cccccc",
+            "placeholder_bg_color": "#2a2a2a",
+            "heading_size": 48,
+            "text_size": 16,
+            "section_padding": 80,
+            "image_border_radius": 8
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5bd99f9_YUYtyB"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": true,
+        "overlay_color": "#000000",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_t7az4D": {
+      "type": "section",
+      "blocks": {
+        "text_Q3DY8b": {
           "type": "text",
           "settings": {
-            "text": "<h2>Premium materials and<br/>hand-selected finishing touches</h2>",
-            "width": "fit-content",
-            "max_width": "none",
-            "alignment": "left",
-            "type_preset": "h3",
-            "font": "var(--font-primary--family)",
-            "font_size": "",
+            "text": "<p>Subscribe to receive exclusive information about <strong>Inga Africa</strong></p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "color": "",
+            "color": "var(--color-foreground)",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -554,24 +953,22 @@
           },
           "blocks": {}
         },
-        "text_hzq6cM": {
-          "type": "text",
+        "email_signup_mjgRtD": {
+          "type": "email-signup",
           "settings": {
-            "text": "<p><a href=\"/collections/all\" title=\"All products\">Shop now</a></p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "right",
-            "type_preset": "h6",
-            "font": "var(--font-secondary--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "uppercase",
-            "wrap": "nowrap",
-            "color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
+            "width": "custom",
+            "custom_width": 50,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border_style": "all",
+            "border_width": 1,
+            "border_radius": 100,
+            "input_type_preset": "paragraph",
+            "style_class": "button-unstyled",
+            "display_type": "arrow",
+            "label": "Sign Up",
+            "integrated_button": true,
+            "button_type_preset": "paragraph",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -581,42 +978,50 @@
         }
       },
       "block_order": [
-        "text_69C6UJ",
-        "text_hzq6cM"
+        "text_Q3DY8b",
+        "email_signup_mjgRtD"
       ],
-      "name": "t:names.hero",
+      "name": "t:names.email_signup",
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "open_in_new_tab": false,
-        "content_direction": "row",
+        "content_direction": "column",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-end",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
         "gap": 16,
         "section_width": "page-width",
-        "section_height": "large",
-        "section_height_custom": 60,
+        "section_height": "",
+        "section_height_custom": 50,
         "color_scheme": "scheme-5",
-        "toggle_overlay": true,
-        "overlay_color": "#00000075",
-        "overlay_style": "gradient",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
         "gradient_direction": "to top",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 0,
+        "padding-block-start": 40,
         "padding-block-end": 40
       }
     }
   },
   "order": [
     "hero_iyt6zg",
+    "17542170840d305641",
+    "1754235633620b8b23",
+    "product_list_UwRqN4",
     "collection_links_Ut4aMz",
     "featured_product_mTUbKC",
-    "product_list_UwRqN4",
-    "hero_MVUtj6"
+    "1754237304d9ab8d02",
+    "17542389413c082586",
+    "1754240221130a3d57",
+    "1754242241795c7663",
+    "section_t7az4D"
   ]
 }

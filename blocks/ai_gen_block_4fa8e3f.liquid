@@ -1,0 +1,578 @@
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-clients-showcase-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding }}px 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .ai-clients-showcase-{{ ai_gen_id }}.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+
+.ai-clients-showcase-container-{{ ai_gen_id }} {
+  width: 85vw;   
+  max-width: none; 
+  margin: 0;     
+  padding: 0;      
+}
+
+
+  .ai-clients-showcase-heading-{{ ai_gen_id }} {
+    font-family: 'Playfair Display', serif;
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 600; 
+    color: {{ block.settings.text_color }};
+    margin: 0 0 {{ block.settings.heading_margin }}px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+     text-align: center;
+  }
+
+    .ai-clients-showcase-description-{{ ai_gen_id }} {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-size: {{ block.settings.description_size }}px;
+    font-weight: 300;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 {{ block.settings.description_margin }}px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+    opacity: 0.85;
+    text-align: center;
+  }
+  .ai-clients-showcase-heading-{{ ai_gen_id }},
+  .ai-clients-showcase-description-{{ ai_gen_id }} {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .ai-clients-showcase-{{ ai_gen_id }}.visible 
+  .ai-clients-showcase-heading-{{ ai_gen_id }},
+  .ai-clients-showcase-{{ ai_gen_id }}.visible 
+  .ai-clients-showcase-description-{{ ai_gen_id }} {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .ai-clients-showcase-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: {{ block.settings.grid_gap }}px;
+    justify-items: center;
+    align-items: center;
+    margin-top: {{ block.settings.grid_margin }}px;
+    width: 100%;
+  }
+
+  .ai-clients-showcase-logo-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: {{ block.settings.logo_padding }}px;
+    border-radius: {{ block.settings.logo_border_radius }}px;
+    transition: all 0.3s ease;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 160px;
+    height: 100px;
+  }
+
+  .ai-clients-showcase-logo-{{ ai_gen_id }} img {
+    max-width: 100%;
+    max-height: 70px; /* taller than before, better balance */
+    object-fit: contain;
+  }
+
+  .ai-clients-showcase-logo-{{ ai_gen_id }}:hover {
+    filter: grayscale(0%) brightness(100%);
+    transform: translateY(-{{ block.settings.hover_lift }}px);
+    box-shadow: 0 {{ block.settings.hover_shadow_blur }}px {{ block.settings.hover_shadow_spread }}px rgba(0, 0, 0, {{ block.settings.hover_shadow_opacity | divided_by: 100.0 }});
+  }
+
+  @media screen and (max-width: 990px) {
+    .ai-clients-showcase-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-clients-showcase-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+
+    .ai-clients-showcase-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding | times: 0.7 }}px 15px;
+    }
+  }
+{% endstyle %}
+
+
+<clients-showcase-{{ ai_gen_id }}
+  class="ai-clients-showcase-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-clients-showcase-container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-clients-showcase-heading-{{ ai_gen_id }}">
+        {{ block.settings.heading }}
+      </h2>
+    {% endif %}
+
+    {% if block.settings.description != blank %}
+      <div class="ai-clients-showcase-description-{{ ai_gen_id }}">
+        {{ block.settings.description }}
+      </div>
+    {% endif %}
+
+    <div class="ai-clients-showcase-grid-{{ ai_gen_id }}">
+      {% for i in (1..16) %}
+        {% assign logo_key = 'logo_' | append: i %}
+
+        {% assign logo = block.settings[logo_key] %}
+
+
+        {% if logo != blank %}
+          <div class="ai-clients-showcase-logo-{{ ai_gen_id }}">
+            <img
+              src="{{ logo | image_url: width: 320 }}"
+              alt="{{ logo.alt | escape }}"
+              loading="lazy"
+              width="{{ logo.width }}"
+              height="{{ logo.height }}"
+            >
+          </div>
+        {% endif %}
+
+      {% endfor %}
+    </div>
+  </div>
+</clients-showcase-{{ ai_gen_id }}><script>
+  (function() {
+    class ClientsShowcase{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.observer = null;
+      }
+
+      connectedCallback() {
+        this.setupScrollReveal();
+      }
+
+      disconnectedCallback() {
+        if (this.observer) {
+          this.observer.disconnect();
+        }
+      }
+
+      setupScrollReveal() {
+        this.observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                this.observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+          }
+        );
+
+        this.observer.observe(this);
+      }
+    }
+
+    customElements.define('clients-showcase-{{ ai_gen_id }}', ClientsShowcase{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Our Clients Showcase",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Clients"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "We're proud to work with industry-leading companies who trust us to deliver exceptional results."
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_margin",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Heading bottom margin",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "description_margin",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Description bottom margin",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Logo Grid"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Grid gap",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "grid_margin",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Grid top margin",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "logo_padding",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo padding",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "logo_max_height",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo max height",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "logo_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Logo border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Hover Effects"
+    },
+    {
+      "type": "range",
+      "id": "grayscale_amount",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Initial grayscale",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "brightness_amount",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Initial brightness",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "hover_lift",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Hover lift amount",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "hover_shadow_blur",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Hover shadow blur",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "hover_shadow_spread",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Hover shadow spread",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "hover_shadow_opacity",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "label": "Hover shadow opacity",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Client Logos"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_1",
+      "label": "Logo 1"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_1",
+      "label": "Logo 1 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_2",
+      "label": "Logo 2"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_2",
+      "label": "Logo 2 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_3",
+      "label": "Logo 3"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_3",
+      "label": "Logo 3 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_4",
+      "label": "Logo 4"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_4",
+      "label": "Logo 4 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_5",
+      "label": "Logo 5"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_5",
+      "label": "Logo 5 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_6",
+      "label": "Logo 6"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_6",
+      "label": "Logo 6 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_7",
+      "label": "Logo 7"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_7",
+      "label": "Logo 7 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_8",
+      "label": "Logo 8"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_8",
+      "label": "Logo 8 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_9",
+      "label": "Logo 9"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_9",
+      "label": "Logo 9 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_10",
+      "label": "Logo 10"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_10",
+      "label": "Logo 10 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_11",
+      "label": "Logo 11"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_11",
+      "label": "Logo 11 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_12",
+      "label": "Logo 12"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_12",
+      "label": "Logo 12 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_13",
+      "label": "Logo 13"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_13",
+      "label": "Logo 13 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_14",
+      "label": "Logo 14"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_14",
+      "label": "Logo 14 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_15",
+      "label": "Logo 15"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_15",
+      "label": "Logo 15 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_16",
+      "label": "Logo 16"
+    },
+    {
+      "type": "url",
+      "id": "logo_url_16",
+      "label": "Logo 16 URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Clients Showcase"
+    }
+  ]
+}
+{% endschema %}
+
+
+

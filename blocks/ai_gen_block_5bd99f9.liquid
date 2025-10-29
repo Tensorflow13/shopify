@@ -1,0 +1,334 @@
+{% doc %}
+  @prompt
+    Create a Shopify section for "Our Story" showcase with two-column desktop layout (stacked on mobile). Left column: customizable heading in Playfair Display font with span tag support for secondary styling, two customizable paragraphs for brand story. Right column: single customizable image visually balanced with text content. Dark minimalist theme with dark background and light text. Include scroll-reveal fade-in animation for all content and images entering viewport. Ensure responsive layout adapting gracefully to desktop and mobile views.
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-our-story-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding }}px 20px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;}
+
+  .ai-our-story-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .ai-our-story-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;}
+
+  .ai-our-story-content-{{ ai_gen_id }} {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .ai-our-story-content-{{ ai_gen_id }}.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ai-our-story-heading-{{ ai_gen_id }} {
+    font-family:'Playfair Display', serif;
+    font-size: {{ block.settings.heading_size }}px;
+    line-height: 1.2;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 30px 0;
+    font-weight: 400;
+  }
+
+  .ai-our-story-heading-{{ ai_gen_id }} span {
+    color: {{ block.settings.accent_color }};
+    font-style: italic;
+  }
+
+  .ai-our-story-paragraph-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 24px 0;
+    opacity: 0.9;
+  }
+
+  .ai-our-story-paragraph-{{ ai_gen_id }}:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .ai-our-story-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+  }
+
+  .ai-our-story-image-wrapper-{{ ai_gen_id }}.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .ai-our-story-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-our-story-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.placeholder_bg_color }};
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;}
+
+  .ai-our-story-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+    color: {{ block.settings.text_color }};
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-our-story-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding | times: 0.6 }}px 16px;
+      min-height: auto;
+    }
+
+    .ai-our-story-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;gap: 40px;
+    }
+
+    .ai-our-story-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+      margin-bottom: 24px;
+    }
+
+    .ai-our-story-paragraph-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size | times: 0.9 }}px;
+      margin-bottom: 20px;
+    }
+
+    .ai-our-story-image-wrapper-{{ ai_gen_id }} {
+      height: 300px;transform: translateY(30px);
+    }
+
+    .ai-our-story-image-wrapper-{{ ai_gen_id }}.visible {
+      transform: translateY(0);
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .ai-our-story-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+    }
+
+    .ai-our-story-image-wrapper-{{ ai_gen_id }} {
+      height: 250px;}
+  }
+{% endstyle %}
+
+<our-story-{{ ai_gen_id }} class="ai-our-story-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-our-story-container-{{ ai_gen_id }}">
+    <div class="ai-our-story-grid-{{ ai_gen_id }}">
+      <div class="ai-our-story-content-{{ ai_gen_id }}" data-reveal="content">
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-our-story-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+        
+        {% if block.settings.paragraph_1 != blank %}
+          <div class="ai-our-story-paragraph-{{ ai_gen_id }}">{{ block.settings.paragraph_1 }}</div>
+        {% endif %}
+        
+        {% if block.settings.paragraph_2 != blank %}
+          <div class="ai-our-story-paragraph-{{ ai_gen_id }}">{{ block.settings.paragraph_2 }}</div>
+        {% endif %}
+      </div>
+      
+      <div class="ai-our-story-image-wrapper-{{ ai_gen_id }}" data-reveal="image">
+        {% if block.settings.story_image %}
+          <img
+            src="{{ block.settings.story_image | image_url: width: 800 }}"
+            alt="{{ block.settings.story_image.alt | escape }}"
+            class="ai-our-story-image-{{ ai_gen_id }}"
+            loading="lazy"
+            width="{{ block.settings.story_image.width }}"
+            height="{{ block.settings.story_image.height }}"
+          >
+        {% else %}
+          <div class="ai-our-story-image-placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</our-story-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class OurStory{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.observer = null;
+      }
+
+      connectedCallback() {
+        this.setupScrollReveal();
+      }
+
+      disconnectedCallback() {
+        if (this.observer) {
+          this.observer.disconnect();
+        }
+      }
+
+      setupScrollReveal() {
+        const elements = this.querySelectorAll('[data-reveal]');
+        
+        if ('IntersectionObserver' in window) {
+          this.observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                this.observer.unobserve(entry.target);
+              }
+            });
+          }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+          });
+
+          elements.forEach((element) => {
+            this.observer.observe(element);
+          });
+        } else {
+          elements.forEach((element) => {
+            element.classList.add('visible');
+          });
+        }
+      }
+    }
+
+    customElements.define('our-story-{{ ai_gen_id }}', OurStory{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Our Story",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Our <span>Story</span></p>"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph_1",
+      "label": "First paragraph",
+      "default": "<p>Founded with a passion for excellence, our journey began with a simple vision: to create products that make a meaningful difference in people's lives. What started as a small idea has grown into something extraordinary.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph_2",
+      "label": "Second paragraph",
+      "default": "<p>Today, we continue to push boundaries and challenge conventions, always staying true to our core values of quality, innovation, and customer satisfaction. Every product we create tells a story of dedication and craftsmanship.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Story image"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_bg_color",
+      "label": "Image placeholder background",
+      "default": "#2a2a2a"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Story"
+    }
+  ]
+}
+{% endschema %}

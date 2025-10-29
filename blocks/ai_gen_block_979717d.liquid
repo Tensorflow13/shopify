@@ -1,0 +1,589 @@
+{% doc %}
+  @prompt
+    Create a section for workshop showcase with two-column desktop layout (stacked on mobile). Left column: customizable heading in Playfair Display font, customizable description paragraph, dynamic list of 3 customizable features with checkmark icons, customizable button linking to gallery. Right column: 2x2 grid of 4 customizable images with hover zoom effect. Dark minimalist theme with dark background and light text. Include scroll-reveal fade-in and slide-up animations for all content and images entering viewport., we also need a "view workshop gallery"
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-workshop-showcase-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    padding: {{ block.settings.section_padding }}px 20px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .ai-workshop-showcase-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .ai-workshop-showcase-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;}
+
+  .ai-workshop-showcase-content-{{ ai_gen_id }} {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .ai-workshop-showcase-content-{{ ai_gen_id }}.ai-workshop-showcase-visible-{{ ai_gen_id }} {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ai-workshop-showcase-heading-{{ ai_gen_id }} {
+    font-family: 'Playfair Display', serif;
+    font-size: {{ block.settings.heading_size }}px;
+    line-height: 1.2;
+    margin: 0 0 24px 0;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .ai-workshop-showcase-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    line-height: 1.6;
+    margin: 0 0 32px 0;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-workshop-showcase-features-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+  }
+
+  .ai-workshop-showcase-feature-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: {{ block.settings.feature_size }}px;}
+
+  .ai-workshop-showcase-checkmark-{{ ai_gen_id }} {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    color: {{ block.settings.checkmark_color }};
+  }
+
+  .ai-workshop-showcase-buttons-{{ ai_gen_id }} {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;}
+
+  .ai-workshop-showcase-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.button_padding_y }}px {{ block.settings.button_padding_x }}px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid {{ block.settings.button_bg_color }};
+  }
+
+  .ai-workshop-showcase-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg }};
+    color: {{ block.settings.button_hover_text }};
+    border-color: {{ block.settings.button_hover_bg }};transform: translateY(-2px);
+  }
+
+  .ai-workshop-showcase-button-secondary-{{ ai_gen_id }} {
+    background-color: transparent;
+    color: {{ block.settings.secondary_button_text_color }};
+    border: 2px solid {{ block.settings.secondary_button_border_color }};
+  }
+
+  .ai-workshop-showcase-button-secondary-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.secondary_button_hover_bg }};
+    color: {{ block.settings.secondary_button_hover_text }};
+    border-color: {{ block.settings.secondary_button_hover_bg }};
+  }
+
+  .ai-workshop-showcase-images-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .ai-workshop-showcase-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .ai-workshop-showcase-image-wrapper-{{ ai_gen_id }}.ai-workshop-showcase-visible-{{ ai_gen_id }} {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ai-workshop-showcase-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .ai-workshop-showcase-image-wrapper-{{ ai_gen_id }}:hover .ai-workshop-showcase-image-{{ ai_gen_id }} {
+    transform: scale(1.1);
+  }
+
+  .ai-workshop-showcase-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.placeholder_bg_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-workshop-showcase-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-workshop-showcase-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .ai-workshop-showcase-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    }
+
+    .ai-workshop-showcase-description-{{ ai_gen_id }} {
+      font-size: {{ block.settings.description_size | times: 0.9 }}px;
+    }
+
+    .ai-workshop-showcase-feature-{{ ai_gen_id }} {
+      font-size: {{ block.settings.feature_size | times: 0.9 }}px;
+    }
+
+    .ai-workshop-showcase-buttons-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-workshop-showcase-button-{{ ai_gen_id }} {
+      text-align: center;
+    }
+  }
+{% endstyle %}
+
+<workshop-showcase-{{ ai_gen_id }}
+  class="ai-workshop-showcase-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-workshop-showcase-container-{{ ai_gen_id }}">
+    <div class="ai-workshop-showcase-grid-{{ ai_gen_id }}">
+      <div class="ai-workshop-showcase-content-{{ ai_gen_id }}" data-reveal>
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-workshop-showcase-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+
+        {% if block.settings.description != blank %}
+          <div class="ai-workshop-showcase-description-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+        {% endif %}
+
+        <ul class="ai-workshop-showcase-features-{{ ai_gen_id }}">
+          {% if block.settings.feature_1 != blank %}
+            <li class="ai-workshop-showcase-feature-{{ ai_gen_id }}">
+              <svg class="ai-workshop-showcase-checkmark-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20,6 9,17 4,12"></polyline>
+              </svg>
+              {{ block.settings.feature_1 }}
+            </li>
+          {% endif %}
+
+          {% if block.settings.feature_2 != blank %}
+            <li class="ai-workshop-showcase-feature-{{ ai_gen_id }}">
+              <svg class="ai-workshop-showcase-checkmark-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20,6 9,17 4,12"></polyline>
+              </svg>
+              {{ block.settings.feature_2 }}
+            </li>
+          {% endif %}
+
+          {% if block.settings.feature_3 != blank %}
+            <li class="ai-workshop-showcase-feature-{{ ai_gen_id }}">
+              <svg class="ai-workshop-showcase-checkmark-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20,6 9,17 4,12"></polyline>
+              </svg>
+              {{ block.settings.feature_3 }}
+            </li>
+          {% endif %}
+        </ul>
+
+        <div class="ai-workshop-showcase-buttons-{{ ai_gen_id }}">
+          {% if block.settings.primary_button_text != blank and block.settings.primary_button_link != blank %}
+            <a href="{{ block.settings.primary_button_link }}" class="ai-workshop-showcase-button-{{ ai_gen_id }}">
+              {{ block.settings.primary_button_text }}
+            </a>
+          {% endif %}
+
+          {% if block.settings.secondary_button_text != blank and block.settings.secondary_button_link != blank %}
+            <a href="{{ block.settings.secondary_button_link }}" class="ai-workshop-showcase-button-{{ ai_gen_id }} ai-workshop-showcase-button-secondary-{{ ai_gen_id }}">
+              {{ block.settings.secondary_button_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="ai-workshop-showcase-images-{{ ai_gen_id }}">
+        {% for i in (1..4) %}
+          {% assign image_key = 'image_' | append: i %}
+          {% assign image = block.settings[image_key] %}
+          <div class="ai-workshop-showcase-image-wrapper-{{ ai_gen_id }}" data-reveal style="transition-delay: {{ forloop.index | times: 0.1 }}s;">
+            {% if image %}
+              <img
+                src="{{ image | image_url: width: 600}}"
+                alt="{{ image.alt | escape }}"
+                class="ai-workshop-showcase-image-{{ ai_gen_id }}"
+                loading="lazy"
+                width="600"
+                height="600"
+              >
+            {% else %}
+              <div class="ai-workshop-showcase-image-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</workshop-showcase-{{ ai_gen_id }}><script>
+  (function() {
+    class WorkshopShowcase{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.observer = null;
+      }
+
+      connectedCallback() {
+        this.setupScrollReveal();
+      }
+
+      disconnectedCallback() {
+        if (this.observer) {
+          this.observer.disconnect();
+        }
+      }
+
+      setupScrollReveal() {
+        const revealElements = this.querySelectorAll('[data-reveal]');
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        };
+
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('ai-workshop-showcase-visible-{{ ai_gen_id }}');
+              this.observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        revealElements.forEach(element => {
+          this.observer.observe(element);
+        });
+      }
+    }
+
+    customElements.define('workshop-showcase-{{ ai_gen_id }}', WorkshopShowcase{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Workshop Showcase",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Master the Art of Craftsmanship"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Join our exclusive workshops where traditional techniques meet modern innovation. Learn from master artisans and create something extraordinary with your own hands."
+    },
+    {
+      "type": "text",
+      "id": "feature_1",
+      "label": "Feature 1",
+      "default": "Expert-led instruction"
+    },
+    {
+      "type": "text",
+      "id": "feature_2",
+      "label": "Feature 2",
+      "default": "All materials included"
+    },
+    {
+      "type": "text",
+      "id": "feature_3",
+      "label": "Feature 3",
+      "default": "Small group sessions"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary button text",
+      "default": "Book Workshop"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary button text",
+      "default": "View Workshop Gallery"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image 4"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "checkmark_color",
+      "label": "Checkmark color",
+      "default": "#4ade80"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Primary button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Primary button text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg","label": "Primary button hover background",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text",
+      "label": "Primary button hover text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_text_color",
+      "label": "Secondary button text color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_border_color",
+      "label": "Secondary button border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_hover_bg",
+      "label": "Secondary button hover background",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_hover_text",
+      "label": "Secondary button hover text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_bg_color",
+      "label": "Image placeholder background",
+      "default": "#2a2a2a"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "feature_size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Feature text size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button text size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Spacing & Style"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Button horizontal padding",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Button vertical padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Workshop Showcase"
+    }
+  ]
+}
+{% endschema %}
